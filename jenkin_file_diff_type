@@ -1,0 +1,231 @@
+jenkin file declarative script with maven pipeline :
+--------------------------------------------------------------------------
+
+pipeline {
+    agent any
+
+    stages {
+        stage('stage-1') {
+            steps {
+               git branch: 'main', credentialsId: 'terraform', url: 'https://github.com/diwakarvenkatasai/terraform_new.git'
+            }
+        }
+   
+        stage('clean') {
+            steps {
+              sh  'mvn clean'
+            }
+        }
+        
+        stage('test') {
+            steps {
+              sh  'mvn test'
+            }
+        }
+        stage('install') {
+            steps {
+               sh  'mvn install'
+            }
+        }
+        
+    }
+}
+jenkins file groovy script with maven project1:
+-----------------------------------------------------------------------------------
+node {
+    stage('stage1') { 
+         git branch: 'main', credentialsId: 'terraform', url: 'https://github.com/diwakarvenkatasai/terraform_new.git'
+    }
+    stage('clean') {
+        sh "mvn clean"
+        
+        }
+    stage('test') {
+        sh "mvn test"
+        
+        }
+    stage('install') {
+        sh "mvn install"
+        
+        }
+}
+
+
+
+
+jenkins pipeline declarative script  with maven project2:
+-------------------------------------------------------------------------------------
+pipeline {
+    agent any
+
+    stages {
+        stage('stage-1') {
+            steps {
+                git branch: 'main', credentialsId: 'aws', url: 'https://github.com/diwakarvenkatasai/terraform_new.git'
+            }
+        }
+   
+        stage('clean') {
+            steps {
+              sh  'mvn clean'
+            }
+        }
+        
+        stage('test') {
+            steps {
+              sh  'mvn test'
+            }
+        }
+        stage('install') {
+            steps {
+               sh  'mvn install'
+            }
+        }
+        
+    }
+}
+
+
+jenkins file with  Terraform rds declarative script with destroy :
+----------------------------------------------------------------
+
+pipeline {
+    agent any
+
+    stages {
+        stage('checkout') {
+            steps {
+                git branch: 'main', credentialsId: 'aws', url: 'https://github.com/diwakarvenkatasai/terraform_new.git'
+            }
+        }
+        stage('init') {
+            steps {
+                sh "terraform init -reconfigure"
+            }
+        }
+        stage('plan') {
+            steps {
+                sh "terraform plan"
+            }
+        }
+        stage('action') {
+            steps {
+                sh "terraform ${action} --auto-approve"
+            }
+        }
+    }
+}
+
+jenkins file with  terraform rds groovy script with apply :
+-------------------------------------------------
+node {
+    stage('stage1') { 
+        git branch: 'main', credentialsId: 'aws', url: 'https://github.com/diwakarvenkatasai/terraform_new.git'
+    }
+    stage('init') {
+        sh "terraform init -reconfigure"
+        
+        }
+    stage('action') {
+        sh "terraform ${action} --auto-approve"
+        
+        }
+}
+
+jenkins file with terraform ec2 declarative script :
+--------------------------------------------------
+
+pipeline {
+    agent any
+
+    stages {
+        stage('checkout') {
+            steps {
+                git branch: 'main', credentialsId: 'aws', url: 'https://github.com/diwakarvenkatasai/terraform_new.git'
+            }
+        }
+        stage('init') {
+            steps {
+                sh "terraform init -reconfigure"
+            }
+        }
+        stage('plan') {
+            steps {
+                sh "terraform plan"
+            }
+        }
+        stage('action') {
+            steps {
+                sh "terraform ${action} --auto-approve"
+            }
+        }
+    }
+}
+
+jfrog declarative script using jenkins:
+-------------------------------------------------------
+pipeline {
+    agent any
+
+    stages {
+        stage('stage-1') {
+            steps {
+                git branch: 'main', credentialsId: 'terraform', url: 'https://github.com/diwakarvenkatasai/terraform_new.git'
+            }
+        }
+   
+        stage('clean') {
+            steps {
+              sh  'mvn clean'
+            }
+        }
+        
+        stage('test') {
+            steps {
+              sh  'mvn test'
+            }
+        }
+        stage('install') {
+            steps {
+               sh  'mvn install'
+            }
+        }
+        
+        }
+      }      
+
+
+creating ec2 declarative script with lambda using jenkins:
+--------------------------------------------------------
+pipeline {
+    agent any
+
+    stages {
+        stage('checkout') {
+            steps {
+                git branch: 'main', credentialsId: 'aws', url: 'https://github.com/diwakarvenkatasai/terraform_new.git'
+            }
+        }
+        stage('lambda') {
+            steps {
+                sh'python lambda.py'
+            }
+        }
+        
+    
+    stage('deploy') {
+            steps {
+                sh'python test.py'
+            }
+        }
+        
+    }
+}
+
+
+
+
+
+
+
+
